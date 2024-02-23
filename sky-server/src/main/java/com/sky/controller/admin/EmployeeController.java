@@ -7,6 +7,7 @@ import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
 import com.sky.result.PageResult;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,20 +88,20 @@ public class EmployeeController{
 
 
 
+
     /**
-     *  修改密码
-     * @param Id
-     * @param newPassword
-     * @param oldPassword
+     * 修改密码
+     * @param passwordEditDTO
      * @return
      */
-    @ApiOperation("修改员工密码")
     @PutMapping("/editPassword")
-    public Result editPassword(Long Id, String newPassword, String oldPassword) {
-        log.info("修改员工:{}，新密码：{}，原密码：{},",Id,newPassword,oldPassword );
-        employeeService.editPassword(Id,newPassword,oldPassword);
+    @ApiOperation("修改密码")
+    public Result editPassword(@RequestBody PasswordEditDTO passwordEditDTO, HttpServletRequest request){
+        log.info("修改密码，{}", passwordEditDTO);
+        employeeService.editPassword(passwordEditDTO, request);
         return Result.success();
     }
+
 
 
     @GetMapping("/page")

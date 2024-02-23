@@ -2,8 +2,11 @@ package com.sky.service;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import com.sky.result.PageResult;
+
+import javax.servlet.http.HttpServletRequest;
 
 public interface EmployeeService {
 
@@ -16,9 +19,7 @@ public interface EmployeeService {
 
     void save(EmployeeDTO employeeDTO);
 
-
-    void editPassword(Long Id, String newPassword, String oldPassword);
-
+    
     PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     void updateStatus(Integer status, Long id);
@@ -26,4 +27,6 @@ public interface EmployeeService {
     Employee getById(Long id);
 
     void update(EmployeeDTO employeeDTO);
+
+    void editPassword(PasswordEditDTO passwordEditDTO, HttpServletRequest request);
 }
